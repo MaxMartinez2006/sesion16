@@ -1,4 +1,5 @@
 package models;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -6,39 +7,21 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
+@Table(name = "cities")
 @Getter
 @Setter
-@Table(name = "students")
 @ToString
-@NamedQueries {
+@NamedQueries({
+        @NamedQuery(name = "City.findAll", query = "SELECT c From City c")
 
-    @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")
+})
 
-}
 
-public class Student {
-
-    @Column (unique = true);
-    private String cif;
+public class City extends BaseEntity{
     @Column(nullable = false)
-    @Length(min = 3, max = 60)
-    private String firstName;
-    @Column(nullable = false)
-    @Length(min = 3, max = 60)
-    private String lastName;
-    @Column (unique = true)
-    private String email;
+    @Length(min = 3, max =60)
+    private String name;
 
-
-
-
-
-
-
-
-
-
-}
-
-public class City {
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private boolean state=true;
 }
